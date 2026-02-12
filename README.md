@@ -3,7 +3,7 @@
 
 A todo-list application built with the [DummyJSON API](https://dummyjson.com/docs/).
 
-link：[https://nimbly-todo-list-s3b9.vercel.app](https://nimbly-todo-list-s3b9.vercel.app/)
+link：[https://todo.a2a.ing](https://todo.a2a.ing )
 
 ## Getting Started
 
