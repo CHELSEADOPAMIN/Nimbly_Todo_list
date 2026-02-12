@@ -7,7 +7,7 @@ link：[https://todo.a2a.ing](https://todo.a2a.ing )
 
 ## Getting Started
 
-### Prerequisites
+### Pre requisites
 
 - Node.js >= 18  
 - pnpm >= 9  
@@ -35,7 +35,7 @@ http://localhost:3000
 
 ### Demo Account
 
-You can use the following credentials to log in:
+You can use the following demo account to log in:
 
 | Username | Password    |
 |----------|------------|
@@ -81,7 +81,7 @@ Users authenticate by entering their username and password on the login page.
 - Provided clear error feedback for network failures, 401 responses, and other authentication errors  
 
 **Related Files:**  
-`app/login/page.tsx` · `lib/api/auth.ts` · `lib/providers/auth-provider.tsx`
+`app/login/page.tsx`  `lib/api/auth.ts`  `lib/providers/auth-provider.tsx`
 
 
 ### 2. Logout Functionality
@@ -92,10 +92,10 @@ Users can log out by clicking the logout button at the bottom of the sidebar.
 
 - Cleared access/refresh tokens from `localStorage`, removed cookie flags, and reset in-memory user state  
 - Automatically redirected to the login page after cleanup  
-- Ensured all three storage layers (`localStorage`, cookies, and React Context state) were cleared to prevent stale session data  
+- Ensured all three storage layers including `localStorage`, cookies, and React Context state were cleared to prevent stale session data  
 
 **Related Files:**  
-`components/layout/sidebar.tsx` · `lib/token.ts` · `lib/providers/auth-provider.tsx`
+`components/layout/sidebar.tsx`  `lib/token.ts`  `lib/providers/auth-provider.tsx`
 
 
 ### 3. Persistent Login State
@@ -110,7 +110,7 @@ Users remain logged in even after closing and reopening the browser (including a
 - Cookies configured with `SameSite=Lax` and `Secure` enabled in HTTPS environments  
 
 **Related Files:**  
-`lib/token.ts` · `lib/api/client.ts` · `middleware.ts`
+`lib/token.ts`  `lib/api/client.ts`  `middleware.ts`
 
 
 ### 4. Todo List & Pagination 
@@ -128,7 +128,7 @@ Authenticated users can view their personal todo list with pagination support.
 - Managed data fetching with TanStack Query using a 30-second `staleTime` to reduce unnecessary refetching  
 
 **Related Files:**  
-`lib/hooks/use-todos.ts` · `lib/api/todos.ts` · `components/todos/todo-pagination.tsx`
+`lib/hooks/use-todos.ts`  `lib/api/todos.ts`  `components/todos/todo-pagination.tsx`
 
 ### 5. Route Protection
 
@@ -136,11 +136,11 @@ Unauthenticated users are prevented from accessing protected routes.
 
 **Implementation:**
 
-- Performed authentication checks at the Next.js middleware layer (Edge Runtime), ensuring no UI flicker before redirects  
+- Performed authentication checks at the Next.js middleware layer, ensuring no UI flicker before redirects  
 - `/` redirects to `/todos` or `/login` based on authentication state  
 - `/login` redirects authenticated users to `/todos`  
 - `/todos/*` routes are intercepted and redirected to `/login` if the user is not authenticated  
-- Middleware reads authentication status from cookies (not `localStorage`), as the Edge Runtime cannot access `localStorage`  
+- Middleware reads authentication status from cookies, as the Edge Runtime cannot access `localStorage`  
 
 **Related File:**  
 `middleware.ts`
@@ -182,7 +182,7 @@ Unit tests were written for critical business logic.
 | Mutation Layer | Rollback failed write operations + user notification | Mutation `onError` cache rollback + toast notifications |
 
 **Related Files:**  
-`lib/api/client.ts` · `app/todos/error.tsx` · `lib/hooks/use-todo-mutations.ts`
+`lib/api/client.ts`  `app/todos/error.tsx`  `lib/hooks/use-todo-mutations.ts`
 
 
 ### 7. Unit Testing
@@ -211,7 +211,7 @@ The HTTP client resolves this using a global lock + request queue mechanism:
 - On successful refresh, all queued requests are retried with the new token  
 - If refresh fails, all queued requests are rejected and the authentication state is cleared  
 
-**Tech:** Axios response interceptors · Promise queue · Global lock pattern  
+**Tech:** Axios response interceptors   Promise queue   Global lock pattern  
 
 
 ### Optimistic Updates with Automatic Rollback
@@ -228,7 +228,7 @@ Core mutation logic is extracted into pure functions (`todo-mutation-helpers.ts`
 To handle DummyJSON’s behavior where `POST` always returns `id: 255`, an ID collision detection mechanism was implemented.  
 Optimistically created todos use decrementing negative IDs (`-1, -2, -3...`) to avoid conflicts with real server data.
 
-**Tech:** TanStack Query `useMutation` · `onMutate` snapshots · `onError` rollback · Pure function helpers  
+**Tech:** TanStack Query `useMutation`  `onMutate` snapshots  `onError` rollback  Pure function helpers  
 
 
 ### Accessibility
@@ -242,7 +242,7 @@ Accessibility considerations were integrated from the start:
 - Minimum 44px touch target for interactive elements  
 - Animation reduction support via `prefers-reduced-motion`  
 
-**Tech:** Semantic HTML · WAI-ARIA · focus-visible · prefers-reduced-motion  
+**Tech:** Semantic HTML  WAI-ARIA  focus-visible  prefers-reduced-motion  
 
 
 ### Loading / Empty / Error States
@@ -255,7 +255,13 @@ Each asynchronous data region implements a complete three-state UI:
 
 During mutations, related buttons display a loading state to prevent duplicate submissions.
 
-**Tech:** Skeleton components · Conditional rendering · `useMutationState` for per-item mutation tracking  
+**Tech:** Skeleton components  Conditional rendering  `useMutationState` for every item mutation tracking  
+
+### Four-Column Workspace Layout
+
+Implemented a four-column layout consisting of **Sidebar + NavPanel + TodoList + DetailPanel**.  
+Users can navigate, browse, select, and edit within a single view without any page transitions.
+For mobile responsiveness, the Sidebar and NavPanel collapse into a hamburger menu overlay, while the DetailPanel slides in from the right to optimize screen space.
 
 ## Project Structure
 ```
