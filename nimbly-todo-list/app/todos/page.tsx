@@ -140,6 +140,7 @@ export default function TodosPage() {
         isCreating={todosState.isCreating}
         isTodoUpdating={todosState.isTodoUpdating}
         onOpenNavigation={() => setNavigationOpen(true)}
+        onLogout={logout}
         onCreate={handleCreate}
         onSelect={(id) => {
           setSelectedTodoId(id);

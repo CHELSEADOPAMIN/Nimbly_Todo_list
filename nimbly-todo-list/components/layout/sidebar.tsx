@@ -64,7 +64,7 @@ export const Sidebar = ({ user, onLogout, className }: SidebarProps) => {
         type="button"
         aria-label="Sign out"
         onClick={onLogout}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-xl text-destructive transition-all duration-200 hover:bg-[rgb(168_84_72_/_0.12)] active:scale-95"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[rgb(168_84_72_/_0.2)] bg-[rgb(168_84_72_/_0.08)] text-destructive transition-all duration-200 hover:bg-[rgb(168_84_72_/_0.14)] active:scale-95"
       >
         <LogOut size={20} aria-hidden="true" />
       </button>
