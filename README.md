@@ -1,4 +1,4 @@
-# Nimbly_Todo_list
+# Nimbly Todo list
 
 
 A todo-list application built with the [DummyJSON API](https://dummyjson.com/docs/).
