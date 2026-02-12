@@ -172,34 +172,11 @@ Unit tests were written for critical business logic.
 
 **Related Files:**  
 `__tests__/unit/`
-### 6. Error Handling
 
-| Layer        | Responsibility                              | Implementation |
-|-------------|----------------------------------------------|---------------|
-| HTTP Layer  | Automatic token refresh on expiration, network error handling | Axios response interceptors |
-| Page Layer  | Fallback UI for rendering failures           | React Error Boundary (`app/todos/error.tsx`) |
-| Query Layer | Display UI when data fetching fails          | TanStack Query `isError` state + error UI |
-| Mutation Layer | Rollback failed write operations + user notification | Mutation `onError` cache rollback + toast notifications |
-
-**Related Files:**  
-`lib/api/client.ts`  `app/todos/error.tsx`  `lib/hooks/use-todo-mutations.ts`
-
-
-### 7. Unit Testing
-
-Unit tests were written for critical business logic.
-
-**Implementation:**
-
-- Used Vitest with a jsdom environment and React Testing Library  
-- Test coverage includes: token storage logic, notes persistence logic, pure mutation helper functions, and pagination algorithm  
-- Covered edge cases such as unavailable `localStorage`, DummyJSON duplicate ID collisions, and empty dataset fallbacks  
-- Automatically cleared `localStorage` and cookies after each test to prevent cross-test contamination  
-
-**Related Files:**  
-`__tests__/unit/`
 
 ## Highlights
+
+As this is a productivity-focused Todo application, I placed strong emphasis on user experience, resilience, and real-world engineering challenges rather than just implementing basic CRUD features. Below are the key enhancements:
 
 ### Concurrent Token Refresh Queue
 
@@ -229,20 +206,6 @@ To handle DummyJSON’s behavior where `POST` always returns `id: 255`, an ID co
 Optimistically created todos use decrementing negative IDs (`-1, -2, -3...`) to avoid conflicts with real server data.
 
 **Tech:** TanStack Query `useMutation`  `onMutate` snapshots  `onError` rollback  Pure function helpers  
-
-
-### Accessibility
-
-Accessibility considerations were integrated from the start:
-
-- Skip link to jump directly to main content  
-- Semantic HTML (`<nav>`, `<main>`, `<aside>`)  
-- ARIA attributes (`aria-label`, `aria-current`, `aria-checked`)  
-- `focus-visible` focus rings  
-- Minimum 44px touch target for interactive elements  
-- Animation reduction support via `prefers-reduced-motion`  
-
-**Tech:** Semantic HTML  WAI-ARIA  focus-visible  prefers-reduced-motion  
 
 
 ### Loading / Empty / Error States
