@@ -89,6 +89,12 @@ export const resolveCreatedTodoId = (
   optimisticId: number,
   createdId: number,
 ): number => {
+  // DummyJSON returns id=255 for created todos, but that id is not persisted
+  // and cannot be updated/deleted afterward (404). Keep optimistic id local.
+  if (createdId === 255) {
+    return optimisticId;
+  }
+
   // DummyJSON can return a repeated id (e.g. 255) for every POST /todos/add.
   // Preserve the optimistic id when a collision is detected to keep list identity stable.
   const hasCollision = todos.some((todo) => todo.id === createdId && todo.id !== optimisticId);

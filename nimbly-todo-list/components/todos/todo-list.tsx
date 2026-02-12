@@ -1,6 +1,6 @@
 "use client";
 
-import { ListChecks, Menu } from "lucide-react";
+import { ListChecks, LogOut, Menu } from "lucide-react";
 import { useMemo } from "react";
 import { TodoCreate } from "@/components/todos/todo-create";
 import { TodoItem } from "@/components/todos/todo-item";
@@ -21,6 +21,7 @@ interface TodoListProps {
   isCreating: boolean;
   isTodoUpdating: (id: number) => boolean;
   onOpenNavigation: () => void;
+  onLogout: () => void;
   onCreate: (todoText: string) => Promise<void>;
   onSelect: (id: number) => void;
   onToggleCompleted: (todo: Todo, nextCompleted: boolean) => Promise<void>;
@@ -46,6 +47,7 @@ export const TodoList = ({
   isCreating,
   isTodoUpdating,
   onOpenNavigation,
+  onLogout,
   onCreate,
   onSelect,
   onToggleCompleted,
@@ -84,6 +86,15 @@ export const TodoList = ({
             {totalCount}
           </span>
         </div>
+
+        <button
+          type="button"
+          aria-label="Sign out"
+          onClick={onLogout}
+          className="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-xl text-destructive transition-colors duration-200 hover:bg-[rgb(168_84_72_/_0.12)] lg:hidden"
+        >
+          <LogOut size={20} aria-hidden="true" />
+        </button>
       </header>
 
       <div className="px-6 pb-3">

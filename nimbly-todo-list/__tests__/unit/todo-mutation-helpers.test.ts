@@ -85,7 +85,7 @@ describe("sanitizeUpdatePayload", () => {
 describe("resolveCreatedTodoId", () => {
   it("should return createdId when no conflict exists", () => {
     const todos = [{ id: -5, todo: "Optimistic", completed: false, userId: 1 }];
-    expect(resolveCreatedTodoId(todos, -5, 255)).toBe(255);
+    expect(resolveCreatedTodoId(todos, -5, 120)).toBe(120);
   });
 
   it("should return optimisticId when createdId already exists in list", () => {
@@ -96,11 +96,8 @@ describe("resolveCreatedTodoId", () => {
     expect(resolveCreatedTodoId(todos, -5, 255)).toBe(-5);
   });
 
-  it("should handle DummyJSON repeated id=255 response", () => {
-    const todos = [
-      { id: -3, todo: "New optimistic", completed: false, userId: 1 },
-      { id: 255, todo: "Server previous", completed: true, userId: 1 },
-    ];
+  it("should preserve optimistic id for DummyJSON id=255 even without collisions", () => {
+    const todos = [{ id: -3, todo: "New optimistic", completed: false, userId: 1 }];
     expect(resolveCreatedTodoId(todos, -3, 255)).toBe(-3);
   });
 });
