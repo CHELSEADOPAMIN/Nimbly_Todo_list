@@ -3,6 +3,8 @@
 
 A todo-list application built with the [DummyJSON API](https://dummyjson.com/docs/).
 
+link：[https://nimbly-todo-list-s3b9.vercel.app](https://nimbly-todo-list-s3b9.vercel.app/)
+
 ## Getting Started
 
 ### Prerequisites
@@ -111,7 +113,7 @@ Users remain logged in even after closing and reopening the browser (including a
 `lib/token.ts` · `lib/api/client.ts` · `middleware.ts`
 
 
-### 4. Todo List & Pagination (10 Items per Page)
+### 4. Todo List & Pagination 
 
 Authenticated users can view their personal todo list with pagination support.
 
