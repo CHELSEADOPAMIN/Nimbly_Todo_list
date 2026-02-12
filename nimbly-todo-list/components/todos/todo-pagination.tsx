@@ -3,7 +3,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
-type PageToken = number | "left-ellipsis" | "right-ellipsis";
+export type PageToken = number | "...";
 
 interface TodoPaginationProps {
   page: number;
@@ -11,7 +11,7 @@ interface TodoPaginationProps {
   onPageChange: (nextPage: number) => void;
 }
 
-const buildPageTokens = (page: number, totalPages: number): PageToken[] => {
+export const buildPageTokens = (page: number, totalPages: number): PageToken[] => {
   if (totalPages <= 7) {
     return Array.from({ length: totalPages }, (_, index) => index + 1);
   }
@@ -21,7 +21,7 @@ const buildPageTokens = (page: number, totalPages: number): PageToken[] => {
   const end = Math.min(totalPages - 1, page + 1);
 
   if (start > 2) {
-    tokens.push("left-ellipsis");
+    tokens.push("...");
   }
 
   for (let cursor = start; cursor <= end; cursor += 1) {
@@ -29,7 +29,7 @@ const buildPageTokens = (page: number, totalPages: number): PageToken[] => {
   }
 
   if (end < totalPages - 1) {
-    tokens.push("right-ellipsis");
+    tokens.push("...");
   }
 
   tokens.push(totalPages);
