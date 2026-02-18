@@ -8,18 +8,18 @@ const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["600", "700", "800"],
-});
+}); // display font
 
 const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-body",
   weight: ["400", "500", "600", "700"],
-});
+}); // body font
 
 export const metadata: Metadata = {
   title: "Nimbly Todo List",
   description: "Organic and natural todo workspace with authentication",
-};
+}; 
 
 interface RootLayoutProps {
   children: React.ReactNode;
